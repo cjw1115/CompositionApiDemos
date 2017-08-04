@@ -7,6 +7,8 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -37,7 +39,7 @@ namespace ParallaxDemo
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -69,6 +71,16 @@ namespace ParallaxDemo
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
                 // Ensure the current window is active
+
+                Windows.ApplicationModel.Core.CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+                if ("Windows.Mobile" == Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily)
+                {
+                    rootFrame.Margin = new Thickness(0, -24, 0, 0);
+                    StatusBar statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+                    //await statusBar.HideAsync();
+                    statusBar.ForegroundColor = Colors.Red;
+                    await Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryConsolidateAsync();
+                }
                 Window.Current.Activate();
             }
         }
