@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="ParallaxDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ParallaxDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid>
+            <!--<Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+                </Grid>-->
+            <Image x:Name="imgBackground" Source="/assets/demo.jpg" Height="500" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+            <ListView x:Name="listView" Margin="0,50,0,0" ItemsSource="{x:Bind VM.Items}">
+                <ListView.Header>
+                    <Grid Height="300"></Grid>
+                </ListView.Header>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="Background" Value="#80FFFFFF"/>
+                        <Setter Property="Margin" Value="0,4"></Setter>
+                        <Setter Property="Padding" Value="8,0"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Grid>
+                            <TextBlock FontSize="20" Text="{x:Bind}" Foreground="Black"></TextBlock>
+                        </Grid>
+                        </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid Height="50" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/> 
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <FontIcon  Glyph="&#xE700;" Grid.Column="0" Width="50" Height="50" Foreground="White"
+                          HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock x:Name="tbHeader" Margin="0,5,0,0" Text="ParallaxEffect Demo" Foreground="White" VerticalAlignment="Stretch" FontSize="28" Grid.Column="1"></TextBlock>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

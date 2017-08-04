@@ -1,0 +1,52 @@
+﻿<Page
+    x:Class="XamlLightDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:XamlLightDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <local:FactorValueConverter x:Key="FactorValueConverter" Factor="3"></local:FactorValueConverter>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Orientation="Vertical">
+            <Slider x:Name="sliderInner" Header="InnerConeAngle"></Slider>
+            <Slider x:Name="sliderOutter" Header="OutterConeAngle"></Slider>
+            <StackPanel Background="White" local:CustomSpotLight.IsTarget="True" Width="500" Height="500" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <StackPanel.Lights>
+                    <local:CustomSpotLight local:CustomSpotLight.InnerConeAngle="{Binding ElementName=sliderInner,Path=Value,Mode=OneWay,Converter={StaticResource FactorValueConverter}}"
+                                       local:CustomSpotLight.OutterConeAngle="{Binding ElementName=sliderOutter,Path=Value,Mode=OneWay,Converter={StaticResource FactorValueConverter}}">
+
+                    </local:CustomSpotLight>
+                </StackPanel.Lights>
+                <!-- this border will be lit by a OrangeSpotLight, but not its children -->
+                <!--<Border BorderThickness="5" Margin="10">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="White" local:OrangeSpotLight.IsTarget="true" />
+                </Border.BorderBrush>
+                <TextBlock Text="hello world" />
+            </Border>
+
+            -->
+                <!-- this border and its content will be lit by OrangeSpotLight -->
+                <!--
+            <Border BorderThickness="5" Margin="10" BorderBrush="White" Background="White" local:OrangeSpotLight.IsTarget="true">
+                <TextBlock Text="hello world" Foreground="Gray" />
+            </Border>
+
+            -->
+                <!-- this border will not be lit -->
+                <!--
+            <Border BorderThickness="5" Margin="10">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="Green" />
+                </Border.BorderBrush>
+                <TextBlock Text="hello world" />
+            </Border>-->
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+
+</Page>

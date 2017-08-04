@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="MediaPlayerDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MediaPlayerDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="GridContent">
+            <MediaElement AutoPlay="False"  Source="/demo.mp4" x:Name="mediaElement" AudioCategory="Movie" Volume="2"></MediaElement>
+        </Grid>
+        <Grid Grid.Row="1" Height="50" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal">
+                <AppBarButton Content="Composition" Icon="OpenFile" Click="AppBarButton_Click"></AppBarButton>
+                <AppBarButton Content="MediaElement" Icon="OpenFile" Click="AppBarButton_Click_1"></AppBarButton>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
